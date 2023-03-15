@@ -5,10 +5,11 @@ namespace Udub.Sdde.Collections.Generic;
 
 public class SinglyLinkedListEnumerator<T> : IEnumerator<T>
 {
+    private ISinglyNode<T> _head;
     private ISinglyNode<T> _current;
-    public SinglyLinkedListEnumerator(ref ISinglyNode<T> input)
+    public SinglyLinkedListEnumerator(ISinglyNode<T> input)
     {
-        _current = input;
+        _current = _head = input;
     }
 
     public T Current => _current.Data!;
@@ -17,19 +18,20 @@ public class SinglyLinkedListEnumerator<T> : IEnumerator<T>
 
     public void Dispose()
     {
-        throw new NotImplementedException();
+        // throw new NotImplementedException();
     }
 
     public bool MoveNext()
     {
-        // if (_current == null) yield return false;
-        // _current = _current!.Next!;
-        // yield return (_current != null);
-        throw new NotImplementedException();
+        if (_current is null) return false;
+        _current = _current.Next!;
+        // return false;
+        return (_current is not null);
+        // throw new NotImplementedException();
     }
 
     public void Reset()
     {
-        throw new NotImplementedException();
+        _current = _head;
     }
 }

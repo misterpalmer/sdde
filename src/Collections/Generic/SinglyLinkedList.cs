@@ -52,14 +52,12 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
 
     public SinglyLinkedList()
     {
-
+        _count = 0;
     }
 
     public SinglyLinkedList(ISinglyNode<T> input)
     {
-        _head = input;
-        _tail = input;
-        _current = input;
+        _head = _tail = _current = input;
         Count++;
     }
 
@@ -101,10 +99,19 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
 
     public void AddFirst(ISinglyNode<T> input)
     {
-        if (!NotExists(input))
+        // validate it does not belong to a list
+        if (NotExists(input))
         {
-            input.Next = First;
-            Current = First;
+            if (First is not null)
+            {
+                input.Next = First;
+                First = input;
+            }
+            else
+            {
+                Current = First = Last = input;
+            }
+            
             Count++;   
         }
     }
@@ -116,10 +123,18 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
 
     public void AddLast(ISinglyNode<T> input)
     {
-        if (!NotExists(input))
+        if (NotExists(input))
         {
-            Last.Next = input;
-            Current = Last;
+            if(First is not null)
+            {
+                Last.Next = input;
+                Last = Last.Next;
+            }
+            else
+            {
+                Current = First = Last = input;
+            }
+
             Count++;
         }
     }
@@ -249,9 +264,7 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
 
     public void Clear()
     {
-        _head = null;
-        _tail = null;
-        _current = null;
+        _head = _tail = _current = null;
         _count = 0;
     }
     
@@ -299,12 +312,25 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
 
     public IEnumerator<T> GetEnumerator()
     {
-        return new SinglyLinkedListEnumerator<T>(ref _head!);
+        var node = _head;
+        while(node is not null)
+        {
+            yield return node.Data!;
+            node = node.Next;
+        }
+        // return new SinglyLinkedListEnumerator<T>(_head!);
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return GetEnumerator();
+        // var node = _head;
+        // while(node is not null)
+        // {
+        //     yield return node.Data!;
+        //     node = node.Next;
+        // }
+        // return GetEnumerator();
+        return new SinglyLinkedListEnumerator<T>(_head!);
     }
 
     private bool Exists(ISinglyNode<T> input)
@@ -325,8 +351,10 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
 
     private bool NotExists(ISinglyNode<T> input)
     {
-        if (input.Next is not null) return true;
-        return false;
+        if (input.Next is null) return true;
+        
+        var message = "Node must not be assigned to another node.";
+        throw new ArgumentException(message);
     }
 
 }
