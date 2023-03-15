@@ -3,6 +3,7 @@ namespace Udub.Sdde.Collections.Generic;
 public class SinglyNode<T> : ISinglyNode<T>
 {
     public T? Data { get; set; }
+    private ISinglyNode<T>? _next;
 
     public SinglyNode()
     {
@@ -20,11 +21,11 @@ public class SinglyNode<T> : ISinglyNode<T>
     {
         get
         {
-            throw new NotImplementedException();
+            return _next;
         }
         set
         {
-            throw new NotImplementedException();
+            _next = value;
         }
     }
 }
