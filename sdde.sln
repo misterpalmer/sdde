@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sdde", "src\sdde.csproj", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sdde.tests", "tests\sdde.tests.csproj", "{64B75DB9-E14B-467A-A7ED-3C9C28B5993A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "clients", "clients\clients.csproj", "{52141276-74E4-4AE8-945E-0AFBD8204CC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{64B75DB9-E14B-467A-A7ED-3C9C28B5993A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64B75DB9-E14B-467A-A7ED-3C9C28B5993A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64B75DB9-E14B-467A-A7ED-3C9C28B5993A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52141276-74E4-4AE8-945E-0AFBD8204CC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52141276-74E4-4AE8-945E-0AFBD8204CC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52141276-74E4-4AE8-945E-0AFBD8204CC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52141276-74E4-4AE8-945E-0AFBD8204CC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3A6D4E75-AD3D-469C-8006-FE36B6AE3DBA} = {8CA6BFF8-5907-4C11-97AC-9DF501AF023F}
