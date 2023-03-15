@@ -18,16 +18,15 @@ public class SinglyLinkedListEnumerator<T> : IEnumerator<T>
 
     public void Dispose()
     {
-        // throw new NotImplementedException();
+        
     }
 
     public bool MoveNext()
     {
         if (_current is null) return false;
+        
         _current = _current.Next!;
-        // return false;
         return (_current is not null);
-        // throw new NotImplementedException();
     }
 
     public void Reset()
