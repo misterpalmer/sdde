@@ -100,7 +100,7 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
     public void AddFirst(ISinglyNode<T> input)
     {
         // validate it does not belong to a list
-        if (NotExists(input))
+        if (!IsLinked(input))
         {
             if (First is not null)
             {
@@ -123,7 +123,7 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
 
     public void AddLast(ISinglyNode<T> input)
     {
-        if (NotExists(input))
+        if (!IsLinked(input))
         {
             if(First is not null)
             {
@@ -291,9 +291,9 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
             throw new InvalidOperationException(Message);
         }
 
-        if (NotExists(input))
+        if (IsLinked(input))
         {
-            const string Message1 = $"{nameof(input)} must not belong to another LinkedList.";
+            const string Message1 = $"{nameof(input)} must not be linked to another node.";
             throw new InvalidOperationException(Message1);
         }
 
@@ -318,18 +318,10 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
             yield return node.Data!;
             node = node.Next;
         }
-        // return new SinglyLinkedListEnumerator<T>(_head!);
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        // var node = _head;
-        // while(node is not null)
-        // {
-        //     yield return node.Data!;
-        //     node = node.Next;
-        // }
-        // return GetEnumerator();
         return new SinglyLinkedListEnumerator<T>(_head!);
     }
 
@@ -349,12 +341,11 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
         return false;
     }
 
-    private bool NotExists(ISinglyNode<T> input)
+    private bool IsLinked(ISinglyNode<T> input)
     {
-        if (input.Next is null) return true;
+        if (input.Next is null) return false;
         
-        var message = "Node must not be assigned to another node.";
-        throw new ArgumentException(message);
+        return (input.Next is not null);
     }
 
 }
