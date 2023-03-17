@@ -5,10 +5,10 @@ public class SinglyNode<T> : ISinglyNode<T>
     public T? Data { get; set; }
     private ISinglyNode<T>? _next;
 
-    public SinglyNode()
-    {
+    // public SinglyNode()
+    // {
         
-    }
+    // }
 
     public SinglyNode(T input)
     {

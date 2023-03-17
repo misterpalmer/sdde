@@ -349,4 +349,3 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
     }
 
 }
-
