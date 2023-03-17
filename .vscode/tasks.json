@@ -2,12 +2,30 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "test",
+            "dependsOn": [],
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "${workspaceFolder}/tests/sdde.tests.csproj",
+                "/p:CollectCoverage=true",
+                "/p:CoverletOutputFormat=lcov",
+                "/p:CoverletOutput=./lcov.info"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
             "label": "build",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/tests/sdde.tests.csproj",
+                "${workspaceFolder}/sdde.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +37,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/tests/sdde.tests.csproj",
+                "${workspaceFolder}/src/sdde.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

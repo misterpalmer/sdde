@@ -12,6 +12,10 @@
 # Built Visual Studio Code Extensions
 *.vsix
 
+
+# Code Coverage
+[Tt]est[Rr]esults/
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -26,3 +30,4 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+
