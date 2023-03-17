@@ -3,10 +3,10 @@ using Udub.Sdde.Collections.Generic;
 
 namespace Sdde.Tests;
 
-public class DoublyLinkedListTests
+public class CircularLinkedListTests
 {
     private readonly ITestOutputHelper output;
-    public DoublyLinkedListTests (ITestOutputHelper output)
+    public CircularLinkedListTests (ITestOutputHelper output)
     {
         this.output = output;
     }
