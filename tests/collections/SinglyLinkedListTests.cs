@@ -401,6 +401,23 @@ public class SinglyLinkedListTests
         tester.Last!.Data.Should().Be(values.Last());
     }
 
+    [Theory]
+    [MemberData(nameof(LinkedListTestsData.CreateLinkedListFromIEnumerableData), MemberType= typeof(LinkedListTestsData))]
+    public void CreateList_FromIEnumerable_ClearList_ReturnListProperties<T>(T[] values)
+    {
+        // Given
+        ISinglyLinkedList<T> tester = new SinglyLinkedList<T>(values);
+
+        // When
+        tester.Clear();
+        
+        // Then
+        using var scope = new AssertionScope();
+        tester.Count.Should<int>().Be(0);
+        tester.First!.Should().BeNull();
+        tester.Last!.Should().BeNull();
+    }
+
     [Fact]
     public void AddAfterByValue()
     {
