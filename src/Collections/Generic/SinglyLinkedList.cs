@@ -142,24 +142,26 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
     // move support for LINQ Extension
     public bool Contains(T input)
     {
-        if (Find(input) != null) return true;
+        if (Find(input) is not null) return true;
         return false;
     }
 
     public ISinglyNode<T>? Find(T input)
     {
-        Current = First;
-        if (Current is null || Current.Data is null) return null;
-        // Node<T>(T input) checks for null input, throws exception
-        ISinglyNode<T> value = new SinglyNode<T>(input);
-
-        while(Current is not null)
+        if (Count > 0)
         {
-            if(Current.Data.Equals(value.Data))
+            Current = First;
+            // Node<T>(T input) checks for null input, throws exception
+            ISinglyNode<T> value = new SinglyNode<T>(input);
+
+            while(Current is not null)
             {
-                return Current;
+                if(Current.Data.Equals(value.Data))
+                {
+                    return Current;
+                }
+                _current = Current.Next;
             }
-            _current = Current.Next;
         }
         return null;
     }
@@ -203,30 +205,24 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
         Current = First;
         while (Current is not null)
         {
-            if (Current.Next!.Data!.Equals(input))
-            {
-                Current.Next = Current.Next.Next;
-                Count--;
-            }
+            if (Current.Data!.Equals(input))
+                {
+                    Current = Current.Next;
+                    Count--;
+                    return true;
+                }
+            
             _current = Current.Next;
         }
 
-        return true;
+        return false;
     }
 
     // need to check previous/next
     // must exist in LinkedList
     public void Remove(ISinglyNode<T> input)
     {
-        Current = First;
-        while (Current is not null)
-        {
-            if (Current.Next == input)
-            {
-                Current.Next = Current.Next.Next;
-                Count--;
-            }
-        }
+        Remove(input.Data);
     }
 
     public bool RemoveAll(T input)
