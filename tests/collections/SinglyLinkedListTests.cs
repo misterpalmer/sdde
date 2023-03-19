@@ -442,10 +442,36 @@ public class SinglyLinkedListTests
         
     }
 
-    [Fact]
-    public void Contains()
+    [Theory]
+    [MemberData(nameof(LinkedListTestsData.CreateLinkedListFromIEnumerableData), MemberType= typeof(LinkedListTestsData))]
+    public void Contains_FindRandomIndexFromInput_ReturnsTrue<T>(T[] values)
     {
+        // Given
+        ISinglyLinkedList<T> sut = new SinglyLinkedList<T>(values);
+        Random random = new Random();
+        var index = random.Next(values.Count());
 
+        // When
+        var result = sut.Contains(values[index]);
+
+        // Then
+        using var scope = new AssertionScope();
+        result.Should().BeTrue();
+    }
+
+    [Theory]
+    [MemberData(nameof(LinkedListTestsData.NegativeSearchData), MemberType= typeof(LinkedListTestsData))]
+    public void Contains_FindRandomIndexFromInput_ReturnsFalse<T>(T[] values, T input)
+    {
+        // Given
+        ISinglyLinkedList<T> sut = new SinglyLinkedList<T>(values);
+
+        // When
+        var result = sut.Contains(input);
+
+        // Then
+        using var scope = new AssertionScope();
+        result.Should().BeFalse();
     }
 
     [Fact]

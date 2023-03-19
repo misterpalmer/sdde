@@ -41,4 +41,20 @@ public class LinkedListTestsData
                 new object[] { true, true, true },
                 new object[] { true, true, false },
             };
+
+    public static IEnumerable<object[]> NegativeSearchData =>
+        new List<object[]>
+            {
+                new object[] { (object) new int[] { 0 }, 1 },
+                new object[] { (object) new int[] { 100, 99 }, 1 },
+                new object[] { (object) new int[] { 1, 2, 3, 4, 5 }, 1000 },
+                new object[] { (object) new int[] { 23, 45, 67 }, 0 },
+                new object[] { (object) new int[] { 98, 76, 54 }, 10000 },
+                new object[] { new string[] { "One", "Two", "Three", "Four", "Five" }, "Zero" },
+                new object[] { new string[] { "linked", "list", "node" }, "stack" },
+                new object[] { new string[] { "singly", "doubly", "circular" }, "heap" },
+                new object[] { (object) new bool[] { true }, false },
+                new object[] { (object) new bool[] { true, true }, false },
+                new object[] { (object) new bool[] { true, true, true }, false },
+            };
 }

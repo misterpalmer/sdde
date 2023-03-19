@@ -148,31 +148,21 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
 
     public ISinglyNode<T>? Find(T input)
     {
-        if (Count > 0)
-        {
-            Current = First;
-            // Node<T>(T input) checks for null input, throws exception
-            ISinglyNode<T> value = new SinglyNode<T>(input);
+        if (First is null) return null;
 
-            while(Current is not null)
-            {
-                if(Current.Data.Equals(value.Data))
-                {
-                    return Current;
-                }
-                _current = Current.Next;
-            }
-        }
-        return null;
+        // Node<T>(T input) checks for null input, throws exception
+        ISinglyNode<T>? result = Find(new SinglyNode<T>(input));
+        return result;
     }
 
     public ISinglyNode<T>? Find(ISinglyNode<T> input)
     {
+        if (First is null) return null;
+        
         Current = First;
-        if (Current is null) return null;
         while(Current is not null)
         {
-            if(Current.Equals(input))
+            if(Current.Data!.Equals(input.Data))
             {
                 return Current;
             }
@@ -207,7 +197,7 @@ public class SinglyLinkedList<T> : ISinglyLinkedList<T> //where T : class
         {
             if (Current.Data!.Equals(input))
                 {
-                    Current = Current.Next;
+                    Current = Current.Next!;
                     Count--;
                     return true;
                 }
