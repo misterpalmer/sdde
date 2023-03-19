@@ -5,31 +5,31 @@ namespace Udub.Sdde.Collections.Generic;
 
 public class DoublyLinkedListEnumerator<T> : IEnumerator<T>
 {
+    private IDoublyNode<T> _head;
     private IDoublyNode<T> _current;
-
-    public T Current => throw new NotImplementedException();
-    object IEnumerator.Current => throw new NotImplementedException();
-
-    public DoublyLinkedListEnumerator(ref IDoublyNode<T> input)
+    public DoublyLinkedListEnumerator(IDoublyNode<T> input)
     {
-        _current = input;
+        _current = _head = input;
     }
+
+    public T Current => _current.Data!;
+    object IEnumerator.Current => Current!;
 
     public void Dispose()
     {
-        throw new NotImplementedException();
+        
     }
 
     public bool MoveNext()
     {
-        // if (_current == null) yield return false;
-        // _current = _current!.Next!;
-        // yield return (_current != null);
-        throw new NotImplementedException();
+        if (_current is null) return false;
+        
+        _current = _current.Next!;
+        return (_current is not null);
     }
 
     public void Reset()
     {
-        throw new NotImplementedException();
+        _current = _head;
     }
 }

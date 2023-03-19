@@ -54,7 +54,7 @@ public class DoublyLinkedList<T> : IDoublyLinkedList<T> //where T : class
 
     public DoublyLinkedList()
     {
-
+        _count = 0;
     }
 
     public DoublyLinkedList(IDoublyNode<T> input)
@@ -110,30 +110,44 @@ public class DoublyLinkedList<T> : IDoublyLinkedList<T> //where T : class
 
     public void AddFirst(IDoublyNode<T> input)
     {
-        if (!NotExists(input))
+        // validate it does not belong to a list
+        if (!IsLinked(input))
         {
-            const string Message = $"{nameof(input)} must not belong to another LinkedList.";
-            throw new InvalidOperationException(Message);
+            if (First is not null)
+            {
+                // IDoublyNode<T> previous = First;
+                input.Next = First;
+                First.Previous = input;
+                First = input;
+            }
+            else
+            {
+                Current = First = Last = input;
+            }
+            Count++;
         }
-
-        IDoublyNode<T> node = First!;
-        _head = input;
-
-        Count++;
     }
 
     public void AddLast(T input)
     {
-        IDoublyNode<T> node = new DoublyNode<T>(input)!;
-        AddLast(node);
+        AddLast(new DoublyNode<T>(input));
     }
 
     public void AddLast(IDoublyNode<T> input)
     {
-        IDoublyNode<T> node = Last!;
-        Last!.Next = input;
-        Last.Next = node.Previous;
-        First!.Previous = Last;
+        if (!IsLinked(input))
+        {
+            if (First is not null)
+            {
+                Last.Next = input;
+                input.Previous = Last;
+                Last = input;
+            }
+            else
+            {
+                Current = First = Last = input;
+            }
+        }
         Count++;
     }
 
@@ -313,7 +327,7 @@ public class DoublyLinkedList<T> : IDoublyLinkedList<T> //where T : class
             throw new InvalidOperationException(Message);
         }
 
-        if (NotExists(input))
+        if (IsLinked(input))
         {
             const string Message1 = $"{nameof(input)} must not belong to another LinkedList.";
             throw new InvalidOperationException(Message1);
@@ -332,12 +346,17 @@ public class DoublyLinkedList<T> : IDoublyLinkedList<T> //where T : class
 
     public IEnumerator<T> GetEnumerator()
     {
-        return new DoublyLinkedListEnumerator<T>(ref _head!);
+        var node = _head;
+        while(node is not null)
+        {
+            yield return node.Data!;
+            node = node.Next;
+        }
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return GetEnumerator();
+        return new DoublyLinkedListEnumerator<T>(_head!);
     }
 
     private bool Exists(IDoublyNode<T> input)
@@ -354,10 +373,11 @@ public class DoublyLinkedList<T> : IDoublyLinkedList<T> //where T : class
         return false;
     }
 
-    private bool NotExists(IDoublyNode<T> input)
+    private bool IsLinked(IDoublyNode<T> input)
     {
-        if (input.Previous != null && input.Next != null) return true;
-        return false;
+        if (input.Previous is null && input.Next is null) return false;
+        
+        return (input.Previous is not null && input.Next is not null);
     }
 
 }

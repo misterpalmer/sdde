@@ -332,12 +332,17 @@ public class CircularLinkedList<T> : IDoublyLinkedList<T> //where T : class
 
     public IEnumerator<T> GetEnumerator()
     {
-        return new DoublyLinkedListEnumerator<T>(ref _head!);
+        var node = _head;
+        while(node is not null)
+        {
+            yield return node.Data!;
+            node = node.Next;
+        }
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return GetEnumerator();
+        return new DoublyLinkedListEnumerator<T>(_head!);
     }
 
     private bool Exists(IDoublyNode<T> input)

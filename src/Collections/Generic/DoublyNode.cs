@@ -3,28 +3,6 @@ namespace Udub.Sdde.Collections.Generic;
 public class DoublyNode<T> : IDoublyNode<T>
 {
     public T Data { get; set; }
-    public IDoublyNode<T>? Previous
-    {
-        get
-        {
-            throw new NotImplementedException();
-        }
-        set
-        {
-            throw new NotImplementedException();
-        }
-    }
-    public IDoublyNode<T>? Next
-    {
-        get
-        {
-            throw new NotImplementedException();
-        }
-        set
-        {
-            throw new NotImplementedException();
-        }
-    }
 
     public DoublyNode(T input)
     {
@@ -32,4 +10,7 @@ public class DoublyNode<T> : IDoublyNode<T>
 
         Data = input;
     }
+
+    public IDoublyNode<T>? Previous { get; set; }
+    public IDoublyNode<T>? Next  { get; set; }
 }
