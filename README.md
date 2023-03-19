@@ -1,2 +1,2 @@
 # sdde
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Coverage Status](https://coveralls.io/repos/github/misterpalmer/sdde/badge.svg?branch=main)](https://coveralls.io/github/misterpalmer/sdde?branch=main)
+![GitHub](https://img.shields.io/github/license/misterpalmer/sdde?style=for-the-badge)  ![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/misterpalmer/sdde/dotnet.yml?branch=main&style=for-the-badge)  ![Coveralls branch](https://img.shields.io/coverallsCoverage/github/misterpalmer/sdde?branch=main&style=for-the-badge)
